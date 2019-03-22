@@ -1,4 +1,5 @@
-import './index.css';
+import ReactDom from 'react-dom';
+import './style.less';
 
 function component() {
     var element = document.createElement('div');
@@ -7,6 +8,5 @@ function component() {
 
     return element;
 }
-
-document.body.appendChild(component());
+ReactDom.render(component(),document.getElementById('app'));
 

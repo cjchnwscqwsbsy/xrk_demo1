@@ -1,5 +1,6 @@
 const path = require('path');
 const merge=require('webpack-merge');
+const autoprefixer=require('autoprefixer');
 const common = require('./webpack.config');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -55,7 +56,27 @@ module.exports = merge(common,{
                 options:{
                     sourceMap:true
                 }
+            },{
+                loader:'postcss-loader',
+                options:{
+                    plugins:[autoprefixer]
+                }
             }]
+        },{
+            test:/\.less$/,
+            use:[{
+                loader:MiniCssExtractPlugin.loader
+            },{
+                loader:'css-loader',
+                options:{
+                    sourceMap:true
+                }
+            },{
+                loader:'postcss-loader',
+                options:{
+                    plugins:[autoprefixer]
+                }
+            },'less-loader']
         }]
     }
 });

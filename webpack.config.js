@@ -13,7 +13,13 @@ module.exports = {
     plugins:[
         new HTMLWebpackPlugin({
             title:'xrk_demo1',
-            template:'./public/index.html'
+            template:'./public/index.html',
+            hash:true,
+            minify:{
+                removeComments:true,
+                collapseWhitespace:true,
+                removeAttributeQuotes:true
+            }
         }),
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
@@ -27,11 +33,22 @@ module.exports = {
             include:path.resolve(__dirname,'src'),
             loader:'babel-loader?cacheDirectory'
         },{
-            test:/\.(png|svg|jpg|git)$/,
-            use:['file-loader']
+            test:/\.(png|svg|jp?g|git)(\?.*)$/,
+            use:[{
+                loader:'url-loader',
+                options: {
+                    limit:30000,
+                    name:'images/[name].[hash].[ext]'
+                }
+            }]
         },{
-            test:/\.(woff|woff2|eot|ttf|otf)$/,
-            use:['file-loader']
+            test:/\.(woff|woff2|eot|svg|ttf|otf)(\?|$)/,
+            use:[{
+                loader:'file-loader',
+                options:{
+                    name:'iconfont/[name].[hash].[ext]'
+                }
+            }]
         },{
             test:/\.(csv|tsv)$/,
             use:['csv-loader']
@@ -46,6 +63,7 @@ module.exports = {
     resolve:{
         alias:{
             src:path.resolve(__dirname,'src')
-        }
+        },
+        extensions: ['.js','.jsx','.json']
     }
 };
