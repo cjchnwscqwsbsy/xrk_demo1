@@ -29,8 +29,8 @@ module.exports = {
     ],
     module:{
         rules:[{
-            test:/\.js(x)$/,
-            include:path.resolve(__dirname,'src'),
+            test:/\.jsx?$/,
+            exclude: '/node_modules/',
             loader:'babel-loader?cacheDirectory'
         },{
             test:/\.(png|svg|jp?g|git)(\?.*)$/,

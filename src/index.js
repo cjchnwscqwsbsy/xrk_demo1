@@ -1,12 +1,5 @@
+import React from 'react';
 import ReactDom from 'react-dom';
-import './style.less';
+import App from './container/app';
 
-function component() {
-    var element = document.createElement('div');
-
-    element.innerHTML = 'Hello World';
-
-    return element;
-}
-ReactDom.render(component(),document.getElementById('app'));
-
+ReactDom.render(<App />, document.getElementById('app'));

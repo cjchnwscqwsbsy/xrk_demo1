@@ -64,6 +64,7 @@ module.exports = merge(common,{
             }]
         },{
             test:/\.less$/,
+            include:path.resolve(__dirname,'src'),
             use:[{
                 loader:MiniCssExtractPlugin.loader
             },{
