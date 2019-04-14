@@ -62,7 +62,7 @@ module.exports = {
     },
     resolve:{
         alias:{
-            component:path.resolve(__dirname,'src/component'),
+            component:path.resolve(__dirname,'src/component/index'),
             template:path.resolve(__dirname,'src/template')
         },
         extensions: ['.js','.jsx','.json']

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactRouter from 'react-router';
 import ReactRouterDom from 'react-router-dom';
+import { DemoComponent } from 'component';
 
 export default  class App extends React.Component {
     constructor(props){
@@ -16,7 +17,7 @@ export default  class App extends React.Component {
                 className={`app-container`}
                 ref={this.myRef}
             >
-                4567890
+                <DemoComponent/>
             </div>
         );
     }
