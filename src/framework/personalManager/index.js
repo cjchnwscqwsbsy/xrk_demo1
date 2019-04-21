@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.less';
 
-export default class Home extends React.Component{
+export default class PersonaManager extends React.Component{
     render(){
         return (
-            <div>Home</div>
+            <div>PersonaManager</div>
         );
     }
 }
