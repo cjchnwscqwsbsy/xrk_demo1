@@ -4,7 +4,14 @@ import './index.less';
 export default class Home extends React.Component{
     render(){
         return (
-            <div>Home</div>
+            <div className={`framework-home`}>
+                <div className={`framework-home-header`}>
+                    header
+                </div>
+                <div className={`framework-home-content`}>
+                    content
+                </div>
+            </div>
         );
     }
 }
