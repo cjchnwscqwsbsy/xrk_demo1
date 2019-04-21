@@ -6,3 +6,5 @@
 
 ###question
 - 全局样式文件重复引入问题
+    - webpack 的话 @import 的内容会合并到一起
+    - 
