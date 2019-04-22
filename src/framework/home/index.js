@@ -9,7 +9,10 @@ export default class Home extends React.Component{
                     header
                 </div>
                 <div className={`framework-home-content`}>
-                    <div className={`framework-home-content-box`}>theme</div>
+                    <div className={`framework-home-content-box`}>
+                        <div className={`framework-home-content-box-menu`}>left</div>
+                        <div className={`framework-home-content-box-showroom`}>right</div>
+                    </div>
                 </div>
             </div>
         );
