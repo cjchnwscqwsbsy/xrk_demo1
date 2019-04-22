@@ -1,8 +1,24 @@
 .framework-home{
   &-header{
-    background: red;
+    position: relative;
+    width: auto;
+    height: 72px;
+    line-height: 72px;
+    margin: 0 auto;
+    //padding-right: 10px;
+    z-index: 900;
+    box-shadow: 0 4px 8px 0 rgba(7, 17, 27, 0.1);
+    background: #ffffff;
   }
   &-content{
-    background: aqua;
+    height: 200px;
+    background: linear-gradient(rgba(247, 212, 212, 0.8),rgba(255,255,255,1));
+    &-box{
+      width: 800px;
+      height: 400px;
+      margin: auto;
+      transform: translateY(40px);
+      background: red;
+    }
   }
 }

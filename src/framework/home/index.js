@@ -9,7 +9,7 @@ export default class Home extends React.Component{
                     header
                 </div>
                 <div className={`framework-home-content`}>
-                    content
+                    <div className={`framework-home-content-box`}>theme</div>
                 </div>
             </div>
         );
