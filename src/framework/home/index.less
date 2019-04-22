@@ -23,9 +23,27 @@
       transform: translateY(40px);
       background: #2b333b;
       &-menu{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
         width: 200px;
         height: 390px;
         background: #2b333b;
+        span{
+          display: block;
+          color: rgba(255, 255, 255, 0.6);
+          padding: 0 16px;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          height: 65px;
+          line-height: 65px;
+          transition: all .1s;
+        }
+        span:hover{
+          background: rgba(255,255,255,.3);
+          color: #ffffff;
+          cursor: pointer;
+        }
       }
       &-showroom{
         height: 100%;
@@ -33,6 +51,12 @@
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         background: aqua;
+        &-slide{
+
+        }
+        &-hatch{
+
+        }
       }
     }
   }
