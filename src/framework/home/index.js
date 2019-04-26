@@ -27,7 +27,9 @@ export default class Home extends React.Component{
                             {dataSource.map(item => <span key={item.key}>{item.title}</span>)}
                         </div>
                         <div className={`framework-home-content-box-showroom`}>
-                            <div className={`framework-home-content-box-showroom-slide`}>轮播图</div>
+                            <div className={`framework-home-content-box-showroom-slide`}>
+                                轮播图
+                            </div>
                             <div className={`framework-home-content-box-showroom-hatch`}>下栏导航</div>
                         </div>
                     </div>
