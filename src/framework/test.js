@@ -1,15 +1,10 @@
-const a = "?name=xrk&gender=man".slice(1);
-const b = a.split('&');
-const c = b.map(item => {
-    let sp = item.split('=');
-    let property = sp[0] === 'name' ? '__name' : sp[0];
-    return {
-        [property]:sp[1]
+function test() {
+    let a = 0;
+    for (let i = 0; i < 10; i ++) {
+        if (i === 5) {
+            a = i;
+        }
     }
-});
-let ret = {};
-c.forEach(each => {
-    Object.assign(ret,each);
-});
-
-console.log(ret);
+    console.log('a=',a);
+}
+test();
