@@ -12,7 +12,7 @@ module.exports = {
     },
     plugins:[
         new HTMLWebpackPlugin({
-            title:'xrk_demo1',
+            title:'hackpaint',
             template:'./public/index.html',
             hash:true,
             minify:{

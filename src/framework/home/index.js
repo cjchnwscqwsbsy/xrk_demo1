@@ -1,8 +1,7 @@
 import React from 'react';
-import { Carousels } from 'component';
+import { Carousels, Button } from 'component';
 import './index.less';
 import { menuData } from './mock';
-
 
 export default class Home extends React.Component{
     constructor(props){
@@ -34,6 +33,7 @@ export default class Home extends React.Component{
                             </div>
                             <div className={`framework-home-content-box-showroom-hatch`}>
                                 <a href=''>下栏导航</a>
+                                <Button background="red"/>
                             </div>
                         </div>
                     </div>
