@@ -5,7 +5,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = {
-    entry:'./src/index.js',
+    entry:{
+        app:'./src/index.js',
+        vendors:['react', 'react-dom', 'antd', 'react-router-dom']
+    },
     output: {
         filename: '[name]-[hash:8].js',
         path: path.resolve(__dirname, 'dist')
@@ -29,7 +32,7 @@ module.exports = {
     ],
     module:{
         rules:[{
-            test:/\.jsx?$/,
+            test:/(\.jsx|\.js)$/,
             exclude: '/node_modules/',
             loader:'babel-loader?cacheDirectory'
         },{

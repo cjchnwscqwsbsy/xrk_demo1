@@ -79,6 +79,23 @@ module.exports = merge(common,{
                     plugins:[autoprefixer]
                 }
             },'less-loader']
+        },{
+            test:/(\.less|\.css)$/,
+            exclude:path.resolve(__dirname,'src'),
+            use:[
+                { loader: "style-loader",},
+                {
+                    loader: "css-loader",
+                    options:{
+                        importLoaders:1
+                    }
+                },{
+                    loader:'less-loader',
+                    options: {
+                        javascriptEnabled: true
+                    }
+                }
+            ]
         }]
     }
 });
