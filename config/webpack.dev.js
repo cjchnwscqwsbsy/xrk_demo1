@@ -7,7 +7,7 @@ module.exports = merge(common,{
     mode:'development',
     devtool:'inline-source-map',
     devServer:{
-        contentBase:'./dist',  //服务启动目录，默认为根目录
+        contentBase:path.resolve(__dirname, '../dist'),  //服务启动目录，默认为根目录
         hot:true,
         /**
          * 下面为可选配置
@@ -53,7 +53,7 @@ module.exports = merge(common,{
     module:{
         rules:[{
             test:/\.css$/,
-            include:path.resolve(__dirname,'src'),
+            include:path.resolve(__dirname,'../src'),
             use:['style-loader',{
                 loader:'css-loader',
                 options:{
@@ -67,7 +67,7 @@ module.exports = merge(common,{
             }]
         },{
             test:/\.less$/,
-            include:path.resolve(__dirname,'src'),
+            include:path.resolve(__dirname,'../src'),
             use:['style-loader',{
                 loader:'css-loader',
                 options:{
@@ -81,7 +81,7 @@ module.exports = merge(common,{
             },'less-loader']
         },{
             test:/(\.less|\.css)$/,
-            exclude:path.resolve(__dirname,'src'),
+            exclude:path.resolve(__dirname,'../src'),
             use:[
                 { loader: "style-loader",},
                 {

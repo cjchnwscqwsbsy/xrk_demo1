@@ -6,17 +6,17 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = {
     entry:{
-        app:'./src/index.js',
+        app:path.resolve(__dirname, '../src/index.js'),
         vendors:['react', 'react-dom', 'antd', 'react-router-dom']
     },
     output: {
         filename: '[name]-[hash:8].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, '../dist')
     },
     plugins:[
         new HTMLWebpackPlugin({
             title:'xrk_demo1',
-            template:'./public/index.html',
+            template:path.resolve(__dirname, '../public/index.html'),
             hash:true,
             minify:{
                 removeComments:true,
@@ -34,9 +34,11 @@ module.exports = {
         rules:[{
             test:/(\.jsx|\.js)$/,
             exclude: '/node_modules/',
-            loader:'babel-loader?cacheDirectory'
+            loader:'babel-loader?cacheDirectory',
+            query: {compact: false}
         },{
             test:/\.(png|svg|jp?g|git)(\?.*)$/,
+            exclude: '/node_modules/',
             use:[{
                 loader:'url-loader',
                 options: {
@@ -65,8 +67,8 @@ module.exports = {
     },
     resolve:{
         alias:{
-            component:path.resolve(__dirname,'src/component/index'),
-            template:path.resolve(__dirname,'src/template')
+            component:path.resolve(__dirname,'../src/component/index'),
+            template:path.resolve(__dirname,'../src/template')
         },
         extensions: ['.js','.jsx','.json']
     }

@@ -8,10 +8,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common,{
     mode:'production',
-    devtool:'hidden-source-map',
+    devtool:'none',
     optimization:{
         minimizer:[
             new UglifyJsPlugin({
+                include: /src/,
                 uglifyOptions:{
                     compress:{
                         // 在UglifyJs删除没有用到的代码时不输出警告
@@ -48,7 +49,7 @@ module.exports = merge(common,{
     module:{
         rules:[{
             test:/\.css$/,
-            include:path.resolve(__dirname,'src'),
+            include:path.resolve(__dirname,'../src'),
             use:[{
                 loader:MiniCssExtractPlugin.loader
             },{
