@@ -1,12 +1,14 @@
-import { post } from 'axios';
+import { post, create } from 'axios';
 
-post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-})
-    .then(function (response) {
-        console.log(response);
+export const POST = () => {
+    post('/api/user', {
+        firstName: 'Fred',
+        lastName: 'Flintstone'
     })
-    .catch(function (error) {
-        console.log(error);
-    });
+        .then(function (response) {
+            console.log('response:',response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};

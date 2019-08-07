@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { POST } from '../lib/rest';
 import './index.less';
 
 export default  Form.create()( class Login extends React.Component{
@@ -7,7 +8,7 @@ export default  Form.create()( class Login extends React.Component{
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                POST();
             }
         });
     };

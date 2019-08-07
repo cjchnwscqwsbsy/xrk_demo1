@@ -2,6 +2,7 @@ const path=require('path');
 const merge=require('webpack-merge');
 const autoprefixer=require('autoprefixer');
 const common = require('./webpack.config');
+const serverConfig = require('../src/framework/profile');
 
 module.exports = merge(common,{
     mode:'development',
@@ -13,9 +14,9 @@ module.exports = merge(common,{
          * 下面为可选配置
          */
         // 指定使用一个 host。默认是 localhost
-        host: 'localhost',
+        host: serverConfig.devServer.host,
         // 端口号
-        port: 8000,
+        port: serverConfig.devServer.port,
         // 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html。通过设置为 true 进行启用
         historyApiFallback: {
             disableDotRule: true
@@ -42,7 +43,7 @@ module.exports = merge(common,{
             '/api/': {
                 changeOrigin: true,
                 // 目标地址
-                target: 'http://localhost:3000',
+                target: serverConfig.proxyServer.baseUrl,
                 // 重写路径
                 pathRewrite: {
                     '^/api/': '/'
