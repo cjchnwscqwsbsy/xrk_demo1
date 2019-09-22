@@ -37,12 +37,12 @@ module.exports = {
             loader:'babel-loader?cacheDirectory',
             query: {compact: false}
         },{
-            test:/\.(png|svg|jp?g|git)(\?.*)$/,
+            test:/\.(png|svg|jp?g|git)$/,
             exclude: '/node_modules/',
             use:[{
                 loader:'url-loader',
                 options: {
-                    limit:30000,
+                    limit:8192,
                     name:'images/[name].[hash].[ext]'
                 }
             }]
