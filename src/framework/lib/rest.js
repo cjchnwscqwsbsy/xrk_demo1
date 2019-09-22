@@ -1,9 +1,9 @@
 import { post, create } from 'axios';
 
 export const POST = () => {
-    post('/api/user', {
-        firstName: 'Fred',
-        lastName: 'Flintstone'
+    post('api/user/login', {
+        username: 'admin',
+        password: 'admin1'
     })
         .then(function (response) {
             console.log('response:',response);

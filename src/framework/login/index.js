@@ -15,7 +15,7 @@ export default  Form.create()( class Login extends React.Component{
     render(){
         const { getFieldDecorator } = this.props.form;
         return (
-            <React.Fragment>
+            <div className="login-cta">
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <Form.Item>
                         {getFieldDecorator('username', {
@@ -52,7 +52,7 @@ export default  Form.create()( class Login extends React.Component{
                         Or <a href="">register now!</a>
                     </Form.Item>
                 </Form>
-            </React.Fragment>
+            </div>
         );
     }
 })
