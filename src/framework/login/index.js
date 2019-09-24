@@ -7,7 +7,8 @@ export default  Form.create()( class Login extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            loading:true
+            loading:true,
+            classNameCal: 0
         };
     }
     componentDidMount() {
@@ -16,7 +17,18 @@ export default  Form.create()( class Login extends React.Component{
                 loading:false
             })
         },300);
+        this.interValTimer();
     }
+
+    interValTimer = () => {
+        setInterval(() => {
+            const { classNameCal } = this.state;
+            console.log(classNameCal);
+            this.setState({
+                classNameCal: classNameCal + 1 > 2 ? 0 : classNameCal + 1,
+            });
+        }, 3000);
+    };
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -26,10 +38,28 @@ export default  Form.create()( class Login extends React.Component{
         });
     };
     render(){
+        const { classNameCal } = this.state;
         const { getFieldDecorator } = this.props.form;
         return (
             <Spin spinning={this.state.loading}>
-                <div className="login-cta" style={{visibility:this.state.loading ? 'hidden' : 'visible'}}>
+                <div
+                  // className="login-cta1"
+                  className={`login-cta login-cta-background-${classNameCal}`}
+                  style={{
+                    visibility: this.state.loading ? 'hidden' : 'visible',
+                }}>
+                    {/*<video*/}
+                      {/*// controls*/}
+                      {/*id="J_video_player"*/}
+                      {/*muted*/}
+                      {/*className="video-player"*/}
+                      {/*data-height="1080"*/}
+                      {/*data-width="1920" height={document.body.clientHeight} width={document.body.clientWidth}*/}
+                      {/*autoPlay*/}
+                      {/*loop*/}
+                    {/*>*/}
+                        {/*<source src="https://t.alipayobjects.com/images/T1T78eXapfXXXXXXXX.mp4" type="video/mp4" />*/}
+                    {/*</video>*/}
                     <Form onSubmit={this.handleSubmit} className="login-form">
                         <Form.Item>
                             {getFieldDecorator('username', {
