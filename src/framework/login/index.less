@@ -2,9 +2,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: cover;
+  position:relative;
+  z-index: -1;
+}
+
+.login-cta-background-0{
   background: url("bglogin.jpg") no-repeat center;
   background-size: cover;
+  animation:mymove 3s infinite;
 }
+
+.login-cta-background-1{
+  background: url("Jianyue112.jpg") no-repeat center;
+  background-size: cover;
+  animation:mymove 3s infinite;
+}
+
+.login-cta-background-2{
+  background: url("Jianyue131.jpg") no-repeat center;
+  background-size: cover;
+  animation:mymove 3s infinite;
+}
+@keyframes mymove
+{
+  from {background-position:0;}
+  to {background-position:100%;}
+}
+
 .login-form {
   max-width: 300px;
 }
