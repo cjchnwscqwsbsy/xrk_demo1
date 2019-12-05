@@ -81,7 +81,7 @@ module.exports = merge(common,{
             },'less-loader']
         },{
             test:/(\.less|\.css)$/,
-            exclude:path.resolve(__dirname,'src'),
+            include:path.resolve(__dirname,'src'),
             use:[
                 { loader: "style-loader",},
                 {
