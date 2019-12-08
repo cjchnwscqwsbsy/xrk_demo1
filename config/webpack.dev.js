@@ -99,11 +99,14 @@ module.exports = merge(common,{
                 },{
                     loader:'postcss-loader',
                     options:{
+                        ident:  "postcss",
+                        sourceMap:true,
                         plugins:[autoprefixer]
                     }
                 },{
                     loader:'less-loader',
                     options: {
+                        sourceMap:true,
                         javascriptEnabled: true
                     }
                 }
