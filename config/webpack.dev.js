@@ -86,42 +86,20 @@ module.exports = merge(common,{
     },
     module:{
         rules:[{
-            test:/\.css$/,
-            include:path.resolve(__dirname,'../src'),
-            use:['style-loader',{
-                loader:'css-loader',
-                options:{
-                    sourceMap:true
-                }
-            },{
-                loader:'postcss-loader',
-                options:{
-                    plugins:[autoprefixer]
-                }
-            }]
-        },{
-            test:/\.less$/,
-            include:path.resolve(__dirname,'../src'),
-            use:['style-loader',{
-                loader:'css-loader',
-                options:{
-                    sourceMap:true
-                }
-            },{
-                loader:'postcss-loader',
-                options:{
-                    plugins:[autoprefixer]
-                }
-            },'less-loader']
-        },{
             test:/(\.less|\.css)$/,
-            exclude:path.resolve(__dirname,'../src'),
+            // exclude:path.resolve(__dirname,'../src'),
             use:[
                 { loader: "style-loader",},
                 {
                     loader: "css-loader",
                     options:{
-                        importLoaders:1
+                        importLoaders:1,
+                        sourceMap:true
+                    }
+                },{
+                    loader:'postcss-loader',
+                    options:{
+                        plugins:[autoprefixer]
                     }
                 },{
                     loader:'less-loader',

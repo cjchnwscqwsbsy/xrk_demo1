@@ -34,8 +34,10 @@ module.exports = {
         rules:[{
             test:/(\.jsx|\.js)$/,
             exclude: '/node_modules/',
-            loader:'babel-loader?cacheDirectory',
-            query: {compact: false}
+            use:[{
+                loader:'babel-loader?cacheDirectory',
+                query: {compact: false}
+            }],
         },{
             test:/\.(png|svg|jp?g|git)$/,
             exclude: '/node_modules/',

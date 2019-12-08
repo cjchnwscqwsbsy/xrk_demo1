@@ -48,54 +48,27 @@ module.exports = merge(common,{
     ],
     module:{
         rules:[{
-            test:/\.css$/,
-            include:path.resolve(__dirname,'../src'),
+            test:/\.(less|css)$/,
+            // include:path.resolve(__dirname,'../src'),
             use:[{
                 loader:MiniCssExtractPlugin.loader
             },{
                 loader:'css-loader',
                 options:{
-                    sourceMap:true
+                    sourceMap:true,
+                    importLoaders:1
                 }
             },{
                 loader:'postcss-loader',
                 options:{
                     plugins:[autoprefixer]
+                }
+            },{
+                loader:'less-loader',
+                options: {
+                    javascriptEnabled: true
                 }
             }]
-        },{
-            test:/\.less$/,
-            include:path.resolve(__dirname,'src'),
-            use:[{
-                loader:MiniCssExtractPlugin.loader
-            },{
-                loader:'css-loader',
-                options:{
-                    sourceMap:true
-                }
-            },{
-                loader:'postcss-loader',
-                options:{
-                    plugins:[autoprefixer]
-                }
-            },'less-loader']
-        },{
-            test:/(\.less|\.css)$/,
-            include:path.resolve(__dirname,'src'),
-            use:[
-                { loader: "style-loader",},
-                {
-                    loader: "css-loader",
-                    options:{
-                        importLoaders:1
-                    }
-                },{
-                    loader:'less-loader',
-                    options: {
-                        javascriptEnabled: true
-                    }
-                }
-            ]
         }]
     }
 });
