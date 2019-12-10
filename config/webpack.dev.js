@@ -75,11 +75,6 @@ module.exports = merge(common,{
                         comments:false
                     }
                 }
-            }),
-            new OptimizeCSSAssetsPlugin({
-                cssProcessorOptions:{
-                    safe:true
-                }
             })
         ],
         splitChunks:{chunks:'all'}
