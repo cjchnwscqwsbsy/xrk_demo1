@@ -9,15 +9,11 @@ module.exports = {
         app:path.resolve(__dirname, '../src/index.js'),
         vendors:['react', 'react-dom', 'antd', 'react-router-dom', 'ol']
     },
-    output: {
-        filename: '[name]-[hash:8].js',
-        path: path.resolve(__dirname, '../dist')
-    },
     plugins:[
         new HTMLWebpackPlugin({
-            title:'xrk_demo1',
             template:path.resolve(__dirname, '../public/index.html'),
             hash:true,
+            favicon: path.resolve(__dirname, '../public/favicon.ico'),
             minify:{
                 removeComments:true,
                 collapseWhitespace:true,

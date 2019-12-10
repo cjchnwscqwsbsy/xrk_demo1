@@ -11,6 +11,7 @@ export default  Form.create()( class Login extends React.Component{
             classNameCal: 0
         };
     }
+
     componentDidMount() {
         setTimeout(() => {
             this.setState({
