@@ -30,6 +30,7 @@ module.exports = {
         rules:[{
             test:/(\.jsx|\.js)$/,
             exclude: '/node_modules/',
+            include: path.resolve(__dirname,'../src/'),
             use:[{
                 loader:'babel-loader?cacheDirectory',
                 query: {compact: false}
@@ -40,12 +41,14 @@ module.exports = {
             use:[{
                 loader:'url-loader',
                 options: {
-                    limit:8192,
+                    limit:15000,
+                    fallback:'file-loader',
                     name:'images/[name].[hash].[ext]'
                 }
             }]
         },{
             test:/\.(woff|woff2|eot|svg|ttf|otf)(\?|$)/,
+            include: [path.resolve(__dirname,'../src/')],
             use:[{
                 loader:'file-loader',
                 options:{

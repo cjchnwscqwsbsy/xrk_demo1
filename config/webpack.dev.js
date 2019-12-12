@@ -1,3 +1,4 @@
+import * as webpack from "webpack";
 const path=require('path');
 const merge=require('webpack-merge');
 const autoprefixer=require('autoprefixer');
@@ -55,6 +56,9 @@ module.exports = merge(common,{
             }
         }
     },
+    plugins:[
+        new  webpack.HotModuleReplacementPlugin() // 替换插件
+    ],
     module:{
         rules:[{
             test:/(\.less|\.css)$/,

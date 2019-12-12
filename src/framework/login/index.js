@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, Spin } from 'antd';
 import { POST } from '../lib/rest';
 import './index.less';
+import {get} from "mobx";
 
 export default  Form.create()( class Login extends React.Component{
     constructor(props){
