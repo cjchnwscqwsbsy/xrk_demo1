@@ -1,4 +1,4 @@
-import * as webpack from "webpack";
+const webpack = require('webpack');
 const path=require('path');
 const merge=require('webpack-merge');
 const autoprefixer=require('autoprefixer');

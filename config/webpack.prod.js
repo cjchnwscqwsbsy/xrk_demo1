@@ -2,7 +2,6 @@ const path = require('path');
 const merge=require('webpack-merge');
 const autoprefixer=require('autoprefixer');
 const common = require('./webpack.config');
-const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
