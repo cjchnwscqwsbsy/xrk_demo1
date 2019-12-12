@@ -7,7 +7,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 module.exports = {
     entry:{
         app:path.resolve(__dirname, '../src/index.js'),
-        vendors:['react', 'react-dom', 'antd', 'react-router-dom', 'ol']
+        vendors:['react', 'react-dom', 'antd', 'react-router-dom']
     },
     plugins:[
         new HTMLWebpackPlugin({

@@ -1,51 +1,48 @@
 import React from 'react';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import {CartoDB, OSM} from 'ol/source';
+import { Carousels } from 'component';
 import './index.less';
+import { menuData } from './mock';
 
 export default class Home extends React.Component{
     constructor(props){
         super(props);
-
+        this.state = {
+            dataSource:[]
+        };
     }
     componentDidMount(){
-        this.mapConfig = {
-            'layers': [{
-                'type': 'cartodb',
-                'options': {
-                    'cartocss_version': '2.1.1',
-                    'cartocss': '#layer { polygon-fill: #F00; }',
-                    'sql': 'select * from european_countries_e where area > 0'
-                }
-            }]
-        };
-        this.cartoDBSource = new CartoDB({
-            account: 'documentation',
-            config: this.mapConfig
-        });
-        this.map = new Map({
-            layers: [
-                new TileLayer({
-                    source: new OSM()
-                }),
-                new TileLayer({
-                    source: this.cartoDBSource
-                })
-            ],
-            target: 'home_map',
-            view: new View({
-                center: [0, 0],
-                zoom: 2
-            })
+        this.setState({
+            dataSource:menuData
         });
     }
     render(){
+        const { dataSource } = this.state;
         const { prefix = 'ro' } = this.props;
         return (
-            <div id='home_map' className={`${prefix}-framework-home`}>
-
+            <div className={`${prefix}-framework`}>
+                <aside className={`${prefix}-framework-left`}>
+                    left menu
+                </aside>
+                <section className={`${prefix}-framework-right`}>
+                    <div className={`${prefix}-framework-header`}>
+                        header
+                    </div>
+                    <div className={`${prefix}-framework-content`}>
+                        <div className={`${prefix}-framework-box`}>
+                            <div className={`${prefix}-framework-box-menu`}>
+                                {dataSource.map(item => <span key={item.key}>{item.title}</span>)}
+                            </div>
+                            <div className={`${prefix}-framework-box-showroom`}>
+                                <div className={`${prefix}-framework-box-showroom-slide`}>
+                                    <Carousels/>
+                                </div>
+                                <div className={`${prefix}-framework-box-showroom-hatch`}>
+                                    <a href=''>下栏导航</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         );
     }
