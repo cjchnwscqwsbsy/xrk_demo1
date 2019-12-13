@@ -3,6 +3,18 @@ const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const ThemeColorReplacer = require('webpack-theme-color-replacer');
+
+function getAntdSerials(color) {
+    const lightens = new Array(9).fill().map((t, i) => {
+        return ThemeColorReplacer.varyColor.lighten(color, i / 10);
+    });
+    // 此处为了简化，采用了darken。实际按color.less需求可以引入tinycolor, colorPalette变换得到颜色值
+    const darkens = new Array(6).fill().map((t, i) => {
+        return ThemeColorReplacer.varyColor.darken(color, i / 10);
+    });
+    return lightens.concat(darkens);
+}
 
 module.exports = {
     entry:{
@@ -22,9 +34,13 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new FriendlyErrorsWebpackPlugin()
+        new FriendlyErrorsWebpackPlugin(),
         // 添加 NamedModulesPlugin，以便更容易查看要修补(patch)的依赖，由于设置了 mode: 'development'，所以这个插件可以省略
-        // new webpack.NamedModulesPlugin()
+        // new webpack.NamedModulesPlugin(),
+        config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [{
+            fileName: 'css/theme-colors.css',
+            matchColors: getAntdSerials('#1890ff'), // 主色系列
+        }])
     ],
     module:{
         rules:[{

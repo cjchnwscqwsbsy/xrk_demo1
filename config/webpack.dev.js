@@ -10,7 +10,6 @@ module.exports = merge(common,{
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, '../dist'),
-        // publicPath: '/xrk/'
     },
     devtool:'inline-source-map',
     devServer:{
@@ -61,7 +60,7 @@ module.exports = merge(common,{
     module:{
         rules:[{
             test:/(\.less|\.css)$/,
-            // exclude:path.resolve(__dirname,'../src'),
+            // include:path.resolve(__dirname,'../src'),
             use:[
                 { loader: "style-loader",},
                 {

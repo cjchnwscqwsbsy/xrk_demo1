@@ -19,31 +19,26 @@ export default class Home extends React.Component{
         const { dataSource } = this.state;
         const { prefix = 'ro' } = this.props;
         return (
-            <div className={`${prefix}-framework`}>
-                <aside className={`${prefix}-framework-left`}>
-                    <div>餐单</div>
-                </aside>
-                <section className={`${prefix}-framework-right`}>
-                    <div className={`${prefix}-framework-header`}>
-                        header
-                    </div>
-                    <div className={`${prefix}-framework-content`}>
-                        <div className={`${prefix}-framework-box`}>
-                            <div className={`${prefix}-framework-box-menu`}>
-                                {dataSource.map(item => <span key={item.key}>{item.title}</span>)}
+            <section className={`${prefix}-framework`}>
+                <div className={`${prefix}-framework-header`}>
+                    header
+                </div>
+                <div className={`${prefix}-framework-content`}>
+                    <div className={`${prefix}-framework-box`}>
+                        <div className={`${prefix}-framework-box-menu`}>
+                            {dataSource.map(item => <span key={item.key}>{item.title}</span>)}
+                        </div>
+                        <div className={`${prefix}-framework-box-showroom`}>
+                            <div className={`${prefix}-framework-box-showroom-slide`}>
+                                <Carousels/>
                             </div>
-                            <div className={`${prefix}-framework-box-showroom`}>
-                                <div className={`${prefix}-framework-box-showroom-slide`}>
-                                    <Carousels/>
-                                </div>
-                                <div className={`${prefix}-framework-box-showroom-hatch`}>
-                                    <a href=''>下栏content</a>
-                                </div>
+                            <div className={`${prefix}-framework-box-showroom-hatch`}>
+                                <a href=''>下栏content</a>
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
         );
     }
 }

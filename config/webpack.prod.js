@@ -69,7 +69,6 @@ module.exports = merge(common,{
         rules:[{
             test:/\.(less|css)$/,
             // include:path.resolve(__dirname,'../src'),
-            // exclude: '/node_modules/',
             use:[{
                 loader:MiniCssExtractPlugin.loader,
             },{
