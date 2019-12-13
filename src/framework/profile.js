@@ -1,8 +1,8 @@
 const proxyServer = {
     host: '127.0.0.1',
-    port : 3005,
+    port : 9000,
     protocol : 'http',
-    baseUrl:'http://127.0.0.1:3005',
+    baseUrl:'http://127.0.0.1:9000',
 };
 
 const devServer = {

@@ -21,7 +21,7 @@ export default class Home extends React.Component{
         return (
             <div className={`${prefix}-framework`}>
                 <aside className={`${prefix}-framework-left`}>
-                    left menu
+                    <div>餐单</div>
                 </aside>
                 <section className={`${prefix}-framework-right`}>
                     <div className={`${prefix}-framework-header`}>
@@ -37,7 +37,7 @@ export default class Home extends React.Component{
                                     <Carousels/>
                                 </div>
                                 <div className={`${prefix}-framework-box-showroom-hatch`}>
-                                    <a href=''>下栏导航</a>
+                                    <a href=''>下栏content</a>
                                 </div>
                             </div>
                         </div>

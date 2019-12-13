@@ -9,11 +9,13 @@ module.exports = merge(common,{
     mode:'development',
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, '../dist')
+        path: path.resolve(__dirname, '../dist'),
+        // publicPath: '/xrk/'
     },
     devtool:'inline-source-map',
     devServer:{
         contentBase:path.resolve(__dirname, '../dist'),  //服务启动目录，默认为根目录
+        publicPath:'',
         hot:true,
         /**
          * 下面为可选配置
@@ -45,7 +47,7 @@ module.exports = merge(common,{
         stats: "errors-only",
         // 设置接口请求代理，更多 proxy 配置请参考 https://github.com/chimurai/http-proxy-middleware#options
         proxy: {
-            '/api/': {
+            '/xrk/': {
                 changeOrigin: true,
                 // 目标地址
                 target: serverConfig.proxyServer.baseUrl,
@@ -56,9 +58,6 @@ module.exports = merge(common,{
             }
         }
     },
-    plugins:[
-        new  webpack.HotModuleReplacementPlugin() // 替换插件
-    ],
     module:{
         rules:[{
             test:/(\.less|\.css)$/,

@@ -1,7 +1,10 @@
 import { post, create } from 'axios';
+import { proxyServer } from '../profile';
+
+const baseUrl = proxyServer.baseUrl;
 
 export const POST = () => {
-    post('api/user/login', {
+    post(`${baseUrl}/user/login`, {
         username: 'admin',
         password: 'admin1'
     })

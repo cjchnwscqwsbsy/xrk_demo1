@@ -1,20 +1,9 @@
-const http = require('http');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-let statusCode = 200;
+const app = express();
 
-const responseHeader = {
-    'Content-Type':'text/html; charset=utf-8',
+app.get('/user/login', (req, res) => res.send('Hello World!'));
 
-};
 
-const listenParams = {
-    port:1337,
-    hostname:'127.0.0.1'
-};
-
-http.createServer((request,response) => {
-    response.writeHead(statusCode,responseHeader);
-    response.end('响应内容');
-}).listen(listenParams.port, listenParams.hostname,() => {
-
-});
+app.listen(9000, () => console.log('Example app listening on port 9000!'));
