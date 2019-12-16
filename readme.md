@@ -1,3 +1,22 @@
+## 中长期任务
+- hackpaint项目持续研发 --- 主要工作 every day
+- less之深入学习与运用 --- 0.5h per day
+
+## question
+
+#### 实时切换网站主题
+- 研究antd-theme-generator&webpack-theme-color-replacer实现原理
+- 熟练使用以上两个npm库
+
+#### css
+- transform:translateY(40px)和margin-top:40px的原理是什么
+    - 元素视图属性：offsetTop和offsetLeft有无变化，是GPU还是CPU进行计算
+
+#### webpack
+- webpack打包图片超过244kib
+- 引入antd第三方库打包后文件过大(1M~3M之间)
+
+
 ## theme
 - 工具集
     - 各种工具组件
@@ -5,6 +24,10 @@
 - 技术交流平台
 
 ## task
+
+#### 导航栏
+- 完成导航栏布局
+- 实现导航栏用户通用操作---涉及前后端交互
 #### 搭建后台服务 --- node
 - 目标：通过node搭建后台服务，深刻理解前后端交互中所用到协议及其他相关技术
 - 成长点：
@@ -17,7 +40,10 @@
 - 修仙之路：
     - express -> koa -> egg
     
-#### 动态切换主题
+#### 动态切换主题 2019.12.16
+- 动态实时的切换整个网站的主题
+- webpack-theme-color-replacer
+- antd-theme-generator
 
 #### 封装rest
 
@@ -28,14 +54,9 @@
 - 深刻理解路由
 - 首页及相关组件定制
 
-## question
-#### css
-- transform:translateY(40px)和margin-top:40px的原理是什么
-    - 元素视图属性：offsetTop和offsetLeft有无变化，是GPU还是CPU进行计算
-
-#### webpack
-- webpack打包图片超过244kib
-- 引入antd第三方库打包后文件过大(1M~3M之间)
+## 网络资源
+- https://yangyuetao.cn/
+- https://umijs.org/zh/guide/#%E7%89%B9%E6%80%A7
 
 ## 实用工具
 - RunKit

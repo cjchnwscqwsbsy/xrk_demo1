@@ -1,7 +1,8 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox, Spin } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import { POST } from '../lib/rest';
 import './index.less';
+import themecolor from "../lib/themecolor";
 
 export default  Form.create()( class Login extends React.Component{
     constructor(props){
@@ -24,6 +25,14 @@ export default  Form.create()( class Login extends React.Component{
                 POST();
             }
         });
+    };
+    handleSwitch = () => {
+        themecolor.changeColor('#abc');
+        // const updateTheme = newPrimaryColor => {
+        //     const hideMessage = message.loading('正在切换主题！', 0)
+        //     themecolor.changeColor('#abc')
+        //         .finally(() => hideMessage())
+        // }
     };
     render(){
         const { getFieldDecorator } = this.props.form;
@@ -60,6 +69,9 @@ export default  Form.create()( class Login extends React.Component{
                     </a>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
+                    </Button>
+                    <Button className="login-form-button" onClick={this.handleSwitch}>
+                        switch
                     </Button>
                     Or <a href="">register now!</a>
                 </Form.Item>

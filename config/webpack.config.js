@@ -37,8 +37,8 @@ module.exports = {
         new FriendlyErrorsWebpackPlugin(),
         // 添加 NamedModulesPlugin，以便更容易查看要修补(patch)的依赖，由于设置了 mode: 'development'，所以这个插件可以省略
         // new webpack.NamedModulesPlugin(),
-        config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [{
-            fileName: 'css/theme-colors.css',
+        new ThemeColorReplacer([{
+            fileName: 'css/theme-colors.[contenthash:8].css',
             matchColors: getAntdSerials('#1890ff'), // 主色系列
         }])
     ],
