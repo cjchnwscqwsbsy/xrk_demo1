@@ -9,7 +9,7 @@ module.exports = merge(common,{
     mode:'development',
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, '../dist'),
+        // path: path.resolve(__dirname, '../dist'),   仅在production模式下有效，默认值即左边
     },
     devtool:'inline-source-map',
     devServer:{

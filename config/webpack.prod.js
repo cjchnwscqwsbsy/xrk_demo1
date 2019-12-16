@@ -5,14 +5,14 @@ const common = require('./webpack.config');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const  BundleAnalyzerPlugin  =  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(common,{
     mode:'production',
     output: {
         filename: '[name]-[hash:8].js',
-        path: path.resolve(__dirname, '../dist'),
-        publicPath: path.resolve(__dirname, '../dist')
+        path: path.resolve(__dirname, '../dist')
     },
     devtool:'none',
     optimization:{
@@ -64,7 +64,8 @@ module.exports = merge(common,{
             parallel:true,
             sourceMap:true
         }),
-        new BundleAnalyzerPlugin()
+        // new CopyWebpackPlugin([{from:path.resolve(__dirname, '../public/assets'), to:path.resolve(__dirname,'../dist/images')}]),
+        // new BundleAnalyzerPlugin()
     ],
     module:{
         rules:[{
@@ -90,6 +91,19 @@ module.exports = merge(common,{
                 options: {
                     sourceMap:true,
                     javascriptEnabled: true
+                }
+            }]
+        },{
+            test:/\.(png|svg|jp?g|git)$/,
+            exclude: '/node_modules/',
+            use:[{
+                loader:'url-loader',
+                options: {
+                    limit:15000,
+                    fallback:'file-loader',
+                    name:'[name].[hash].[ext]',
+                    outputPath:'./img_bg',
+                    publicPath:'./img_bg'
                 }
             }]
         }]

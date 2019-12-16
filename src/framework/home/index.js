@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousels } from 'component';
 import './index.less';
+import ro_logo from './ro_logo.jpg';
 import { menuData } from './mock';
 
 export default class Home extends React.Component{
@@ -21,7 +22,7 @@ export default class Home extends React.Component{
         return (
             <section className={`${prefix}-framework`}>
                 <div className={`${prefix}-framework-header`}>
-                    <img src='../../../public/assets/ro_logo.jpg'/>
+                    <img src={ro_logo}/>
                 </div>
                 <div className={`${prefix}-framework-content`}>
                     <div className={`${prefix}-framework-box`}>

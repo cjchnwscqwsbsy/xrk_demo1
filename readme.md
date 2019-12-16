@@ -12,7 +12,17 @@
 - webpack打包图片超过244kib
 - 引入antd第三方库打包后文件过大(1M~3M之间)
 - img标签打包问题
+     - 将img引用的图片移动到指定目录后，打包后的js中依然img引用的图片路径没有改变
 
+- publicPath
+    - devServer中的publicPath
+        - 访问内存中的文件路径，该字段未显示设置则以output.publicPath为准
+        - 默认值是/
+        - 该值是以contentBase为根路径基础
+        - devServe构建的文件都是在内存中
+    - output中的publicPath:
+        - 其他xxx.publicPath的备胎或参考标准
+        - 建议使用output.publicPath作为唯一标准
 
 ## Target
 - 工具集

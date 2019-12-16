@@ -4,7 +4,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ThemeColorReplacer = require('webpack-theme-color-replacer');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 function getAntdSerials(color) {
     const lightens = new Array(9).fill().map((t, i) => {
@@ -41,8 +40,7 @@ module.exports = {
         new ThemeColorReplacer([{
             fileName: 'css/theme-colors.[contenthash:8].css',
             matchColors: getAntdSerials('#1890ff'), // 主色系列
-        }]),
-        new CopyWebpackPlugin([{from:path.resolve(__dirname, '../public/assets'), to:path.resolve(__dirname,'../dist/images')}])
+        }])
     ],
     module:{
         rules:[{
@@ -53,17 +51,6 @@ module.exports = {
                 loader:'babel-loader?cacheDirectory',
                 query: {compact: false}
             }],
-        },{
-            test:/\.(png|svg|jp?g|git)$/,
-            exclude: '/node_modules/',
-            use:[{
-                loader:'url-loader',
-                options: {
-                    limit:15000,
-                    fallback:'file-loader',
-                    name:'images/[name].[hash].[ext]'
-                }
-            }]
         },{
             test:/\.(woff|woff2|eot|svg|ttf|otf)(\?|$)/,
             include: [path.resolve(__dirname,'../src/')],
