@@ -4,6 +4,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ThemeColorReplacer = require('webpack-theme-color-replacer');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 function getAntdSerials(color) {
     const lightens = new Array(9).fill().map((t, i) => {
@@ -40,7 +41,8 @@ module.exports = {
         new ThemeColorReplacer([{
             fileName: 'css/theme-colors.[contenthash:8].css',
             matchColors: getAntdSerials('#1890ff'), // 主色系列
-        }])
+        }]),
+        new CopyWebpackPlugin([{from:path.resolve(__dirname, '../public/assets'), to:path.resolve(__dirname,'../dist/images')}])
     ],
     module:{
         rules:[{

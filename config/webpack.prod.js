@@ -11,7 +11,8 @@ module.exports = merge(common,{
     mode:'production',
     output: {
         filename: '[name]-[hash:8].js',
-        path: path.resolve(__dirname, '../dist')
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: path.resolve(__dirname, '../dist')
     },
     devtool:'none',
     optimization:{

@@ -1,8 +1,4 @@
-## 中长期任务
-- hackpaint项目持续研发 --- 主要工作 every day
-- less之深入学习与运用 --- 0.5h per day
-
-## question
+## Question
 
 #### 实时切换网站主题
 - 研究antd-theme-generator&webpack-theme-color-replacer实现原理
@@ -15,19 +11,23 @@
 #### webpack
 - webpack打包图片超过244kib
 - 引入antd第三方库打包后文件过大(1M~3M之间)
+- img标签打包问题
 
 
-## theme
+## Target
 - 工具集
     - 各种工具组件
     - 页面可视化快速构建
 - 技术交流平台
 
-## task
+## Task
 
 #### 导航栏
 - 完成导航栏布局
 - 实现导航栏用户通用操作---涉及前后端交互
+    - logo图标上传下载
+    - 用户登录
+
 #### 搭建后台服务 --- node
 - 目标：通过node搭建后台服务，深刻理解前后端交互中所用到协议及其他相关技术
 - 成长点：
@@ -60,3 +60,9 @@
 
 ## 实用工具
 - RunKit
+
+## 中长期任务
+- hackpaint项目持续研发 --- 主要工作 every day
+- less之深入学习与运用 --- 0.5h per day
+- React之间断性升级与优化  --- 1d per week
+

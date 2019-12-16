@@ -21,7 +21,7 @@ export default class Home extends React.Component{
         return (
             <section className={`${prefix}-framework`}>
                 <div className={`${prefix}-framework-header`}>
-                    header
+                    <img src='../../../public/assets/ro_logo.jpg'/>
                 </div>
                 <div className={`${prefix}-framework-content`}>
                     <div className={`${prefix}-framework-box`}>

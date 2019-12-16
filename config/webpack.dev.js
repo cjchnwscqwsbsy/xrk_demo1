@@ -14,7 +14,6 @@ module.exports = merge(common,{
     devtool:'inline-source-map',
     devServer:{
         contentBase:path.resolve(__dirname, '../dist'),  //服务启动目录，默认为根目录
-        publicPath:'',
         hot:true,
         /**
          * 下面为可选配置
