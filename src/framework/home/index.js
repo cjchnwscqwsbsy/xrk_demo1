@@ -23,6 +23,8 @@ export default class Home extends React.Component{
             <section className={`${prefix}-framework`}>
                 <div className={`${prefix}-framework-header`}>
                     <img src={ro_logo}/>
+                    <div className={`${prefix}-framework-header-menu`}>菜单</div>
+                    <div className={`${prefix}-framework-header-users`}>用户</div>
                 </div>
                 <div className={`${prefix}-framework-content`}>
                     <div className={`${prefix}-framework-box`}>
