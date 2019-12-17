@@ -93,19 +93,6 @@ module.exports = merge(common,{
                     javascriptEnabled: true
                 }
             }]
-        },{
-            test:/\.(png|svg|jp?g|git)$/,
-            exclude: '/node_modules/',
-            use:[{
-                loader:'url-loader',
-                options: {
-                    limit:15000,
-                    fallback:'file-loader',
-                    name:'[name].[hash].[ext]',
-                    outputPath:'./img_bg',
-                    publicPath:'./img_bg'
-                }
-            }]
         }]
     }
 });
