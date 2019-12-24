@@ -1,10 +1,8 @@
 const path = require('path');
 const merge=require('webpack-merge');
-const autoprefixer=require('autoprefixer');
 const common = require('./webpack.config');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const  BundleAnalyzerPlugin  =  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -50,10 +48,6 @@ module.exports = merge(common,{
         // splitChunks:{chunks:'all'}
     },
     plugins:[
-        new MiniCssExtractPlugin({
-            filename:'[name].[contenthash:8].css',
-            chunkFilename:'[name].[contenthash:8].chunk.css'
-        }),
         new OptimizeCSSAssetsPlugin({
             cssProcessorOptions:{
                 safe:true
@@ -66,33 +60,5 @@ module.exports = merge(common,{
         }),
         // new CopyWebpackPlugin([{from:path.resolve(__dirname, '../public/assets'), to:path.resolve(__dirname,'../dist/images')}]),
         // new BundleAnalyzerPlugin()
-    ],
-    module:{
-        rules:[{
-            test:/\.(less|css)$/,
-            // include:path.resolve(__dirname,'../src'),
-            use:[{
-                loader:MiniCssExtractPlugin.loader,
-            },{
-                loader:'css-loader',
-                options:{
-                    sourceMap:true,
-                    importLoaders:1
-                }
-            },{
-                loader:'postcss-loader',
-                options:{
-                    ident:  "postcss",
-                    sourceMap:true,
-                    plugins:[autoprefixer]
-                }
-            },{
-                loader:'less-loader',
-                options: {
-                    sourceMap:true,
-                    javascriptEnabled: true
-                }
-            }]
-        }]
-    }
+    ]
 });

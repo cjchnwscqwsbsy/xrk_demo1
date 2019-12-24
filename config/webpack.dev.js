@@ -1,7 +1,5 @@
-const webpack = require('webpack');
 const path=require('path');
 const merge=require('webpack-merge');
-const autoprefixer=require('autoprefixer');
 const common = require('./webpack.config');
 const serverConfig = require('../src/framework/profile');
 
@@ -55,34 +53,5 @@ module.exports = merge(common,{
                 }
             }
         }
-    },
-    module:{
-        rules:[{
-            test:/(\.less|\.css)$/,
-            // include:path.resolve(__dirname,'../src'),
-            use:[
-                { loader: "style-loader",},
-                {
-                    loader: "css-loader",
-                    options:{
-                        importLoaders:1,
-                        sourceMap:true
-                    }
-                },{
-                    loader:'postcss-loader',
-                    options:{
-                        ident:  "postcss",
-                        sourceMap:true,
-                        plugins:[autoprefixer]
-                    }
-                },{
-                    loader:'less-loader',
-                    options: {
-                        sourceMap:true,
-                        javascriptEnabled: true
-                    }
-                }
-            ]
-        }]
     }
 });

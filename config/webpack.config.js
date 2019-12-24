@@ -4,6 +4,8 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ThemeColorReplacer = require('webpack-theme-color-replacer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const autoprefixer=require('autoprefixer');
 
 function getAntdSerials(color) {
     const lightens = new Array(9).fill().map((t, i) => {
@@ -14,6 +16,14 @@ function getAntdSerials(color) {
         return ThemeColorReplacer.varyColor.darken(color, i / 10);
     });
     return lightens.concat(darkens);
+}
+
+function getENV(){
+    console.log('process.env.NODE_ENV    ',process.env.NODE_ENV);
+    if (process.env.NODE_ENV === 'production'){
+        return '[name].[contenthash:8]';
+    }
+    return '[name]';
 }
 
 module.exports = {
@@ -31,6 +41,10 @@ module.exports = {
                 collapseWhitespace:true,
                 removeAttributeQuotes:true
             }
+        }),
+        new MiniCssExtractPlugin({
+            filename:`${getENV()}.css`,
+            chunkFilename:`${getENV()}.chunk.css`
         }),
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
@@ -51,6 +65,31 @@ module.exports = {
                 loader:'babel-loader?cacheDirectory',
                 query: {compact: false}
             }],
+        },{
+            test:/\.(less|css)$/,
+            // include:path.resolve(__dirname,'../src'),
+            use:[{
+                loader:MiniCssExtractPlugin.loader,
+            },{
+                loader:'css-loader',
+                options:{
+                    sourceMap:true,
+                    importLoaders:1
+                }
+            },{
+                loader:'postcss-loader',
+                options:{
+                    ident:  "postcss",
+                    sourceMap:true,
+                    plugins:[autoprefixer]
+                }
+            },{
+                loader:'less-loader',
+                options: {
+                    sourceMap:true,
+                    javascriptEnabled: true
+                }
+            }]
         },{
             test:/\.(woff|woff2|eot|svg|ttf|otf)(\?|$)/,
             include: [path.resolve(__dirname,'../src/')],

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Avatar, Icon } from 'antd';
 import { Carousels } from 'component';
 import './index.less';
 import ro_logo from './ro_logo.jpg';
@@ -24,7 +25,10 @@ export default class Home extends React.Component{
                 <div className={`${prefix}-framework-header`}>
                     <img src={ro_logo}/>
                     <div className={`${prefix}-framework-header-menu`}>菜单</div>
-                    <div className={`${prefix}-framework-header-users`}>用户</div>
+                    <div className={`${prefix}-framework-header-users`}>
+                        <Avatar style={{cursor:'pointer'}} size="large" icon={<Icon type="user" />} />
+                        <span>谢荣康</span>
+                    </div>
                 </div>
                 <div className={`${prefix}-framework-content`}>
                     <div className={`${prefix}-framework-box`}>
