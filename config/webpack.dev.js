@@ -43,13 +43,13 @@ module.exports = merge(common,{
         stats: "errors-only",
         // 设置接口请求代理，更多 proxy 配置请参考 https://github.com/chimurai/http-proxy-middleware#options
         proxy: {
-            '/xrk/': {
+            '/xrk': {
                 changeOrigin: true,
                 // 目标地址
                 target: serverConfig.proxyServer.baseUrl,
                 // 重写路径
                 pathRewrite: {
-                    '^/api/': '/'
+                    '^/xrk/': ''
                 }
             }
         }

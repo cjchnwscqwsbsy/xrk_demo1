@@ -72,5 +72,11 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 9"
-  ]
+  ],
+  "proxy": {
+    "/xrk": {
+      "target": "127.0.0.1:9000",
+      "changeOrigin": true
+    }
+  }
 }
