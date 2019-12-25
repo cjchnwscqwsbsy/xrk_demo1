@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
-import { POST } from '../lib/rest';
+import { post } from '../lib/rest';
 import './index.less';
 import themecolor from "../lib/themecolor";
 
@@ -18,11 +18,14 @@ export default  Form.create()( class Login extends React.Component{
             })
         },300);
     }
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(async(err, values) => {
             if (!err) {
-                POST('/user/login', values);
+                const rest = await post('/user/login', values);
+                if (rest.code === 'success') {
+                    alert(rest.data);
+                }
             }
         });
     };
