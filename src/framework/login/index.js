@@ -22,9 +22,10 @@ export default  Form.create()( class Login extends React.Component{
         e.preventDefault();
         this.props.form.validateFields(async(err, values) => {
             if (!err) {
-                const rest = await post('/user/login', values);
+                const rest = await post('/login', values);
                 if (rest.code === 'success') {
-                    alert(rest.data);
+                    localStorage.setItem('token',rest.data);
+                    window.location.href = '/';
                 }
             }
         });

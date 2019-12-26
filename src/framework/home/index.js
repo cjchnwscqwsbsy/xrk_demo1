@@ -1,9 +1,9 @@
 import React from 'react';
 import { Avatar, Icon } from 'antd';
 import { Carousels } from 'component';
+import { get } from '../lib/rest';
 import './index.less';
 import ro_logo from './ro_logo.jpg';
-import { menuData } from './mock';
 
 export default class Home extends React.Component{
     constructor(props){
@@ -13,8 +13,10 @@ export default class Home extends React.Component{
         };
     }
     componentDidMount(){
-        this.setState({
-            dataSource:menuData
+        get(`/home/menu`).then(ret => {
+            this.setState({
+                dataSource:ret.data
+            });
         });
     }
     render(){
@@ -33,7 +35,7 @@ export default class Home extends React.Component{
                 <div className={`${prefix}-framework-content`}>
                     <div className={`${prefix}-framework-box`}>
                         <div className={`${prefix}-framework-box-menu`}>
-                            {dataSource.map(item => <span key={item.key}>{item.title}</span>)}
+                            {dataSource.length > 0 && dataSource.map(item => <span key={item.key}>{item.title}</span>)}
                         </div>
                         <div className={`${prefix}-framework-box-showroom`}>
                             <div className={`${prefix}-framework-box-showroom-slide`}>

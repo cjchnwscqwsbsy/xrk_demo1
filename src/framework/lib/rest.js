@@ -2,18 +2,28 @@ import Axios from 'axios';
 import { proxyServer } from '../profile';
 import withAxios from "react-axios/lib/components/withAxios";
 
-const rest = {};
-
 const baseUrl = proxyServer.baseUrl;
 
 const config  = Axios.create({
     baseURL:baseUrl,
     headers:{
-        'Content-Type':'application/json;charset=utf-8'
+        'Content-Type':'application/json;charset=utf-8',
     },
     timeout:3000,
     withCredentials:false
 });
+
+config.interceptors.request.use(
+    (configs) => {
+        if (localStorage.token) {
+            configs.headers['authorization'] = 'authorization' + localStorage.token;
+        }
+        return configs;
+    },
+    (error) => {
+
+    },
+);
 
 config.interceptors.response.use(
     (response) => {
@@ -70,6 +80,10 @@ config.interceptors.response.use(
         return error;
     }
 );
+
+export const get = (url, data, request) => {
+    return config.get(url, data);
+};
 
 export const post = (url, data, request) => {
     return config.post(url, data);
