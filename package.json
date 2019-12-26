@@ -5,10 +5,9 @@
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --config config/webpack.dev.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --open --config config/webpack.dev.js",
     "build2": "npx webpack --config config/webpack.prod.js --mode production",
-    "dev2": "npx webpack-dev-server --open --config config/webpack.dev.js --mode development",
-    "server": "nodemon server/index.js"
+    "dev": "npx webpack-dev-server --open --config config/webpack.dev.js --mode development"
   },
   "keywords": [],
   "author": "",
@@ -38,7 +37,6 @@
     "less-loader": "^5.0.0",
     "markdown-loader": "^5.1.0",
     "mini-css-extract-plugin": "^0.8.0",
-    "nodemon": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "style-loader": "^1.0.1",
@@ -56,9 +54,7 @@
     "antd": "^3.26.0",
     "axios": "^0.19.0",
     "babel-runtime": "^6.26.0",
-    "body-parser": "^1.19.0",
     "core-js": "^3.4.7",
-    "express": "^4.17.1",
     "npm-check": "^5.9.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
