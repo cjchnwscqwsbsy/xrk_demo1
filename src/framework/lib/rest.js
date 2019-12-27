@@ -46,6 +46,7 @@ config.interceptors.response.use(
                 break;
             case 401:
                 error.message = '未授权，请登录';
+                window.location.href = '/login';
                 break;
             case 403:
                 error.message = '拒绝访问';

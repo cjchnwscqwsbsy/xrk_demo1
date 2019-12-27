@@ -24,7 +24,7 @@ export default  Form.create()( class Login extends React.Component{
             if (!err) {
                 const rest = await post('/login', values);
                 if (rest.code === 'success') {
-                    localStorage.setItem('token',rest.data);
+                    localStorage.setItem('token',rest.data.token);
                     window.location.href = '/';
                 }
             }
