@@ -16,7 +16,7 @@ const config  = Axios.create({
 config.interceptors.request.use(
     (configs) => {
         if (localStorage.token) {
-            configs.headers['authorization'] = 'authorization' + localStorage.token;
+            configs.headers['authorization'] = localStorage.token;
         }
         return configs;
     },
