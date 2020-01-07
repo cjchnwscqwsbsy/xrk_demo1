@@ -20,7 +20,7 @@ export default class Home extends React.Component{
         });
     }
     render(){
-        const { dataSource } = this.state;
+        const { dataSource = [] } = this.state;
         const { prefix = 'ro' } = this.props;
         return (
             <section className={`${prefix}-framework`}>
