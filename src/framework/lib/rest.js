@@ -9,19 +9,20 @@ const config  = Axios.create({
     headers:{
         'Content-Type':'application/json;charset=utf-8',
     },
-    timeout:3000,
+    timeout:13000,
     withCredentials:false
 });
 
 config.interceptors.request.use(
     (configs) => {
         if (localStorage.token) {
+            console.log('token: ',localStorage.token)
             configs.headers['authorization'] = localStorage.token;
         }
         return configs;
     },
     (error) => {
-
+        console.log('error: ', error)
     },
 );
 
