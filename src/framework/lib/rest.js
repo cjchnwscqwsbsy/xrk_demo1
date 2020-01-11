@@ -28,20 +28,20 @@ config.interceptors.request.use(
 
 config.interceptors.response.use(
     (response) => {
-        console.log('response msg: ', response);
-        if (response.status === 401) {
-            alert('暂无权限，请重新登录!');
-            window.location.href = '/login';
-            return false;
+        if (response.status === 200) {
+            if (response.data.code) {
+                console.log(response.data)
+                return statusCall(response.data);
+            }
         }
-        return {
-            code:'success',
-            data:response.data
-        };
     },
     (error) => {
-        console.log('response error: ', error);
+        console.log('response error: ', error.response);
         switch (error && error.response && error.response.status) {
+            case 302:
+                error.message = '';
+                window.location.href = '/login';
+                break;
             case 400:
                 error.message = '请求错误';
                 break;
@@ -82,6 +82,33 @@ config.interceptors.response.use(
         return error;
     }
 );
+
+const statusCall = (data) => {
+    let responseMsg = null;
+    switch (data.code) {
+        case 200:
+            responseMsg = {
+                code:'success',
+                data:data
+            };
+            break;
+        case 302:
+            window.location.href = '/login';
+            break;
+        case 401:
+            alert('暂无权限，请重新登录!');
+            // window.location.href = '/login';
+            break;
+        case 500:
+            responseMsg = {
+                code:'error',
+                data:data
+            };
+            break;
+        default:
+    }
+    return responseMsg;
+};
 
 export const get = (url, data, request) => {
     return config.get(url, data);

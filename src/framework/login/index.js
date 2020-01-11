@@ -23,6 +23,7 @@ export default  Form.create()( class Login extends React.Component{
         this.props.form.validateFields(async(err, values) => {
             if (!err) {
                 const rest = await post('/app/user/login', values);
+                console.log('request result: ',rest);
                 if (rest.code === 'success') {
                     localStorage.setItem('token',rest.data.token);
                     window.location.href = '/';

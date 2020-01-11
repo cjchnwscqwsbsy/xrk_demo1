@@ -15,7 +15,7 @@ export default class Home extends React.Component{
     componentDidMount(){
         get(`/app/home/menu`).then(ret => {
             this.setState({
-                dataSource:ret.data
+                dataSource:ret.data.dataSource
             });
         });
     }
