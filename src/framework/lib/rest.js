@@ -10,7 +10,7 @@ const config  = Axios.create({
         'Content-Type':'application/json;charset=utf-8',
     },
     timeout:13000,
-    withCredentials:false
+    withCredentials:false    //是否跨域
 });
 
 config.interceptors.request.use(
