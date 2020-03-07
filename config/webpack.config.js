@@ -28,7 +28,7 @@ function getENV(){
 module.exports = {
     entry:{
         app:path.resolve(__dirname, '../src/index.js'),
-        vendors:['react', 'react-dom', 'antd', 'react-router-dom']
+        vendors:['react', 'react-dom', 'antd', 'react-router-dom', 'd3']
     },
     plugins:[
         new HTMLWebpackPlugin({
