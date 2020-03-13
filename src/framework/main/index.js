@@ -191,7 +191,7 @@ export default class Main extends React.Component{
             .on('zoom', this.redraw);
 
         //创建svg容器
-        const svg = d3.select('.main-cta-modal')
+        const svg = d3.select('.tree-lines')
             .append('svg')
             .attr('width', config.chartWidth + config.margin.right + config.margin.left)
             .attr('height', config.chartHeight + config.margin.top + config.margin.bottom)
@@ -503,8 +503,8 @@ export default class Main extends React.Component{
     render(){
         return (
             <div className='main-cta'>
-                <div className='main-cta-modal'>
-                </div>
+                <div className='tree-lines'></div>
+                <div className='tree-nodes'></div>
             </div>
         );
     }
