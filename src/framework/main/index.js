@@ -10,8 +10,7 @@ export default class Main extends React.Component{
         this.rootRectWidth = 300;
         this.state = {
             dataSource: {
-                "downward": {
-                    "direction": "downward",
+                "direction": "downward",
                     "name": "origin",
                     "children": [
                         {
@@ -188,14 +187,10 @@ export default class Main extends React.Component{
                             ]
                         }
                     ]
-                }
             }
         };
     }
     componentDidMount(){
-        this.graphTree(this.getTreeConfig());
-    }
-    getTreeConfig = () => {
         this.treeConfig = {
             'margin': {
                 'top': 10,
@@ -206,21 +201,18 @@ export default class Main extends React.Component{
         }
         this.treeConfig.chartWidth = (1100 - this.treeConfig.margin.right - this.treeConfig.margin.left);
         this.treeConfig.chartHeight = (600 - this.treeConfig.margin.top - this.treeConfig.margin.bottom);
-        this.treeConfig.centralHeight = this.treeConfig.chartHeight / 2;
+        this.treeConfig.centralHeight = this.treeConfig.chartHeight / 3;
         this.treeConfig.centralWidth = this.treeConfig.chartWidth / 2;
-        this.treeConfig.linkLength = 120;
+        this.treeConfig.linkLength = 110;
         this.treeConfig.duration = 500;
-        return this.treeConfig;
-    };
-    graphTree = (config) => {
-        const linkLength = config.linkLength;
-        const duration = config.duration;
+        this.graphTree(this.treeConfig);
+    }
+    graphTree = () => {
         this.hasChildNodeArr = [];
-        const id = 0;
 
-        //对角线，首位节点坐标
+        //对角线，首尾节点坐标
         this.diagonal = d3.svg.diagonal()
-            .source(function(d) {
+            .source((d) => {
                 return {
                     "x": d.source.x,
                     "y": d.source.name == 'origin' ? (d.source.y + 20) : (d.source.y + 60)
@@ -239,11 +231,15 @@ export default class Main extends React.Component{
             .scaleExtent([0.5, 2])
             .on('zoom', this.redraw);
 
+        //创建块容器
+        this.treeGraph = d3.select('.tree-graph');
+
         //创建svg容器
-        const svg = d3.select('.main-cta-modal')
+        const svgCta = this.treeGraph
             .append('svg')
-            .attr('width', config.chartWidth + config.margin.right + config.margin.left)
-            .attr('height', config.chartHeight + config.margin.top + config.margin.bottom)
+            .style('position', 'absolute')
+            .attr('width', this.treeConfig.chartWidth + this.treeConfig.margin.right + this.treeConfig.margin.left)
+            .attr('height', this.treeConfig.chartHeight + this.treeConfig.margin.top + this.treeConfig.margin.bottom)
             .style('border', '1px solid #cd0000')
             .attr('xmlns','http://www.w3.org/2000/svg')
             .on('mousedown', this.disableRightClick)
@@ -251,12 +247,12 @@ export default class Main extends React.Component{
             .on('dblclick.zoom', null);
 
         //创建，添加或选择新的元素g，添加属性
-        this.treeG = svg.append('g')
+        this.treeG = svgCta.append('g')
             .attr('class', 'gbox')
-            .attr('transform', 'translate(' + config.margin.left + ',' + config.margin.top + ')');
+            .attr('transform', 'translate(' + this.treeConfig.margin.left + ',' + this.treeConfig.margin.top + ')');
 
         //绘制箭头
-        const markerDown = svg.append("marker")
+        const markerDown = svgCta.append("marker")
             .attr("id", "resolvedDown")
             .attr("markerUnits", "strokeWidth") //设置为strokeWidth箭头会随着线的粗细发生变化
             .attr("markerUnits", "userSpaceOnUse")
@@ -272,9 +268,9 @@ export default class Main extends React.Component{
             .attr('fill', '#000'); //箭头颜色
 
         // 临时数据
-        this.data = this.state.dataSource['downward'];
-        this.data.x0 = config.centralWidth;
-        this.data.y0 = config.centralHeight;
+        this.data = this.state.dataSource;
+        this.data.x0 = this.treeConfig.centralWidth;
+        this.data.y0 = this.treeConfig.centralHeight;
         this.data.children.forEach(this.collapse);
         this.update(this.data, this.data, this.treeG);
     };
@@ -282,19 +278,17 @@ export default class Main extends React.Component{
 
         const self_diagonal = this.diagonal;
 
-        const direction = originalData['direction'];
-        const node_class = direction + 'Node';
-        const link_class = direction + 'Link';
+        const node_class = 'direction' + 'Node';
+        const link_class = 'direction' + 'Link';
         const downwardSign = 1;
-        const nodeColor = '#8b4513';
-
-        const statusUp = true;
-        const statusDown = true;
         const nodeSpace = 250;
 
         const tree = d3.layout.tree().sort(this.sortByDate).nodeSize([nodeSpace, 0]);
         const nodes = tree.nodes(originalData);
         const links = tree.links(nodes);
+        console.log('originalData: ', originalData)
+        console.log('nodes: ', nodes)
+        console.log('links: ', links)
         const offsetX = -this.treeConfig.centralWidth;
         nodes.forEach((d) => {
             d.y = downwardSign * (d.depth * this.treeConfig.linkLength) + this.treeConfig.centralHeight;
@@ -424,6 +418,15 @@ export default class Main extends React.Component{
 
             nodeUpdate.select('text').style('fill-opacity', 1)
 
+            const dom_nodes = this.treeGraph.selectAll('xrk-span')
+                .data(nodes)
+                .enter()
+                .append('input')
+                .attr('class', 'xrk-span')
+                .attr('style', (d) => {
+                    return "position:absolute;display:inline-block;width:50px;height:50px;border:1px solid red;transform:translate(" + (d.x + 14) + "px," + (d.y) + "px)";
+                });
+
             const nodeExit = node.exit().transition()
                 .duration(this.treeConfig.duration)
                 .attr('transform', (d) => {
@@ -478,7 +481,6 @@ export default class Main extends React.Component{
                 })
                 .remove();
             nodes.forEach((d) => {
-                console.log('d__: ',d)
                 d.x0 = d.x;
                 d.y0 = d.y;
             });
@@ -551,11 +553,7 @@ export default class Main extends React.Component{
     };
     render(){
         return (
-            <div className='main-cta'>
-                <div className='main-cta-modal'>
-                </div>
-                <span style={{display:'block',width:230,height:40,transform:'translate(782.5px,415px)'}}></span>
-            </div>
+            <div className='tree-graph'></div>
         );
     }
 }
