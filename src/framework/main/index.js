@@ -7,7 +7,7 @@ export default class Main extends React.Component{
     constructor(props){
         super(props);
         this.id = 0;
-        this.rootRectWidth = '上海冰鉴信息科技有限公司'.length * 15;
+        this.rootRectWidth = 300;
         this.state = {
             dataSource: {
                 "downward": {
@@ -28,7 +28,56 @@ export default class Main extends React.Component{
                                     "hasChildren":true,
                                     "amount": "100",
                                     "ratio": "55%",
-                                    "children": []
+                                    "children": [
+                                        {
+                                            "name": "公司名字depth3",
+                                            "hasHumanholding":false,
+                                            "hasChildren":true,
+                                            "amount": "100",
+                                            "ratio": "55%",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "公司名字depth3",
+                                            "hasHumanholding":false,
+                                            "hasChildren":true,
+                                            "amount": "100",
+                                            "ratio": "55%",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "公司名字depth3",
+                                            "hasHumanholding":false,
+                                            "hasChildren":true,
+                                            "amount": "100",
+                                            "ratio": "55%",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "公司名字depth3",
+                                            "hasHumanholding":false,
+                                            "hasChildren":true,
+                                            "amount": "100",
+                                            "ratio": "55%",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "公司名字depth3",
+                                            "hasHumanholding":false,
+                                            "hasChildren":true,
+                                            "amount": "100",
+                                            "ratio": "55%",
+                                            "children": []
+                                        },
+                                        {
+                                            "name": "公司名字depth3",
+                                            "hasHumanholding":false,
+                                            "hasChildren":true,
+                                            "amount": "100",
+                                            "ratio": "55%",
+                                            "children": []
+                                        }
+                                    ]
                                 },
                                 {
                                     "name": "公司名字",
@@ -241,7 +290,7 @@ export default class Main extends React.Component{
 
         const statusUp = true;
         const statusDown = true;
-        const nodeSpace = 130;
+        const nodeSpace = 250;
 
         const tree = d3.layout.tree().sort(this.sortByDate).nodeSize([nodeSpace, 0]);
         const nodes = tree.nodes(originalData);
@@ -269,16 +318,15 @@ export default class Main extends React.Component{
             .style('cursor', (d) => {
                 return(d.name == 'origin') ? '' : (d.children || d._children) ? 'pointer' : '';
             });
-
         nodeEnter.append('rect')
             .attr('x', (d) => {
-                return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -60;
+                return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -120;
             })
             .attr('y', (d) => {
                 return(d.name == 'origin') ? -20 : 12;
             })
             .attr('width', (d) => {
-                return(d.name == 'origin') ? this.rootRectWidth : 120;
+                return(d.name == 'origin') ? this.rootRectWidth : 230;
             })
             .attr('height', 40)
             .attr('rx', 10)
@@ -430,6 +478,7 @@ export default class Main extends React.Component{
                 })
                 .remove();
             nodes.forEach((d) => {
+                console.log('d__: ',d)
                 d.x0 = d.x;
                 d.y0 = d.y;
             });
@@ -464,10 +513,9 @@ export default class Main extends React.Component{
         if(d.name === 'origin') {
             return;
         }
-        console.log('select--: ', d3.selectAll('.isExpand')[0])
         const touchedText = d3.selectAll('.isExpand')[0][num];
-        console.log('select: ', touchedText.textContent)
         touchedText.textContent = touchedText.textContent !== '+' ? '+' : '-';
+        // console.log(num, touchedText);
         if(d.children) {
             d._children = d.children;
             d.children = null;
@@ -491,6 +539,7 @@ export default class Main extends React.Component{
             //     return '-';
             // })
         }
+        console.log(d);
         this.update(d, this.data, this.treeG);
     }
     expand = (d) => {
@@ -505,6 +554,7 @@ export default class Main extends React.Component{
             <div className='main-cta'>
                 <div className='main-cta-modal'>
                 </div>
+                <span style={{display:'block',width:230,height:40,transform:'translate(782.5px,415px)'}}></span>
             </div>
         );
     }
