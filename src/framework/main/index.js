@@ -302,62 +302,9 @@ export default class Main extends React.Component{
             .style('cursor', (d) => {
                 return(d.name == 'origin') ? '' : (d.children || d._children) ? 'pointer' : '';
             });
-        // nodeEnter.append('rect')
-        //     .attr('x', (d) => {
-        //         return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -120;
-        //     })
-        //     .attr('y', (d) => {
-        //         return(d.name == 'origin') ? -20 : 12;
-        //     })
-        //     .attr('width', (d) => {
-        //         return(d.name == 'origin') ? this.rootRectWidth : 230;
-        //     })
-        //     .attr('height', 40)
-        //     .attr('rx', 10)
-        //     .style('stroke', (d) => {
-        //         return(d.name == 'origin') ? "#1078AF" : "#CCC";
-        //     })
-        //     .style("fill", function(d) {
-        //         return(d.name == 'origin') ? "#0080E3" : "#FFF";   //节点背景色
-        //     });
 
         nodeEnter.append('circle')
             .attr('r', 1e-6);
-
-        // nodeEnter.append('text')
-        //     .attr('class', 'linkname')
-        //     .attr('x', (d) => {
-        //         return(d.name == 'origin') ? '0' : "-55";
-        //     })
-        //     .attr('dy', (d) => {
-        //         return(d.name == 'origin') ? '.35em' : '24';
-        //     })
-        //     .attr('text-anchor', (d) => {
-        //         return(d.name == 'origin') ? 'middle' : "start";
-        //     })
-        //     .attr('fill', '#000')
-        //     .text((d) => {
-        //         if(d.name === 'origin'){
-        //             return '根节点'
-        //         }
-        //         if(d.repeated){
-        //             return `[Recurring]${d.name}`;
-        //         }
-        //         return d.name.length > 10 ? d.name.substr(0, 10) : d.name;
-        //     })
-        //     .style({
-        //         'fill-opacity': 1e-6,
-        //         'fill': (d) => {
-        //             if(d.name === 'origin'){
-        //                 return '#fff'
-        //             }
-        //         },
-        //         'font-size': (d) => {
-        //             return d.name === 'origin' ? 14 : 11;
-        //         },
-        //         'cursor': 'pointer'
-        //     })
-        //     .on('click', this.Change_modal);
 
             //添加DOM元素
             const node_item = nodeEnter.append('foreignObject')
@@ -394,21 +341,6 @@ export default class Main extends React.Component{
                 .attr('transform', (d) => {
                     return `translate(${d.x}, ${d.y})`
                 });
-
-            // this.dom_nodes = this.treeGraph.selectAll('xrk-span')
-            //     .data(nodes)
-            //     .enter()
-            //     .append('input')
-            //     .call(this.custZoom())
-            //     .attr('class', 'xrk-span')
-            //     .attr('style', (d) => {
-            //         return "position:absolute;display:inline-block;width:50px;height:50px;border:1px solid red;transform:translate(" + (d.x + 14) + "px," + (d.y) + "px)";
-            //     });
-            // this.dom_nodes.transition()
-            //     .duration(this.treeConfig.duration)
-            //     .attr('transform', (d) => {
-            //         return `translate(${d.x}, ${d.y})`
-            //     });
 
             nodeUpdate.select('circle')
                 .attr('r', (d) => {
@@ -526,10 +458,6 @@ export default class Main extends React.Component{
     }
     redraw = () => {
         this.treeG.attr('transform', `translate(${d3.event.translate})scale(${d3.event.scale})`);
-        // this.dom_nodes.attr('style', (d) => {
-        //     return `position:absolute;display:inline-block;width:50px;height:50px;border:1px solid red;
-        //     transform:translate(${d.x + d3.event.translate[0]}px, ${d.y + d3.event.translate[1]}px) scale(${d3.event.scale})`;
-        // });
     }
     isableRightClick = () => {
         // stop zoom
