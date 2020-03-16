@@ -3,6 +3,34 @@ import * as d3 from 'd3';
 import { Tag } from 'antd';
 import './index.less';
 
+
+// const forObj = nodeEnter.append('foreignObject')
+        //     .attr('x', (d) => {
+        //         return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -120;
+        //     })
+        //     .attr('y', (d) => {
+        //         return(d.name == 'origin') ? -20 : 12;
+        //     })
+        //     .attr('width', (d) => {
+        //         return(d.name == 'origin') ? this.rootRectWidth : 230;
+        //     })
+        //     .attr('height', 40)
+        //     .attr('style','border:1px solid #1078AF; background:#FFF;border-radius:10px')
+
+        //     .attr('x', (d) => {
+        //         return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -120;
+        //     })
+        //     .attr('y', (d) => {
+        //         return(d.name == 'origin') ? -20 : 12;
+        //     })
+        //     .attr('width', (d) => {
+        //         return(d.name == 'origin') ? this.rootRectWidth : 230;
+        //     })
+        // forObj.append('div')
+        //     .attr('value','谢荣康')
+
+
+
 export default class Main extends React.Component{
     constructor(props){
         super(props);

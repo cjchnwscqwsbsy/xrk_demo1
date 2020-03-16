@@ -226,24 +226,19 @@ export default class Main extends React.Component{
                 return [d.x, d.y];
             });
 
-        //缩放行为
-        const zoom = d3.behavior.zoom()
-            .scaleExtent([0.5, 2])
-            .on('zoom', this.redraw);
-
         //创建块容器
         this.treeGraph = d3.select('.tree-graph');
 
         //创建svg容器
         const svgCta = this.treeGraph
             .append('svg')
-            .style('position', 'absolute')
+            // .style('position', 'absolute')
             .attr('width', this.treeConfig.chartWidth + this.treeConfig.margin.right + this.treeConfig.margin.left)
             .attr('height', this.treeConfig.chartHeight + this.treeConfig.margin.top + this.treeConfig.margin.bottom)
             .style('border', '1px solid #cd0000')
             .attr('xmlns','http://www.w3.org/2000/svg')
             .on('mousedown', this.disableRightClick)
-            .call(zoom)
+            .call(this.custZoom())
             .on('dblclick.zoom', null);
 
         //创建，添加或选择新的元素g，添加属性
@@ -275,9 +270,7 @@ export default class Main extends React.Component{
         this.update(this.data, this.data, this.treeG);
     };
     update = (source, originalData, g) => {
-
         const self_diagonal = this.diagonal;
-
         const node_class = 'direction' + 'Node';
         const link_class = 'direction' + 'Link';
         const downwardSign = 1;
@@ -286,9 +279,6 @@ export default class Main extends React.Component{
         const tree = d3.layout.tree().sort(this.sortByDate).nodeSize([nodeSpace, 0]);
         const nodes = tree.nodes(originalData);
         const links = tree.links(nodes);
-        console.log('originalData: ', originalData)
-        console.log('nodes: ', nodes)
-        console.log('links: ', links)
         const offsetX = -this.treeConfig.centralWidth;
         nodes.forEach((d) => {
             d.y = downwardSign * (d.depth * this.treeConfig.linkLength) + this.treeConfig.centralHeight;
@@ -312,62 +302,91 @@ export default class Main extends React.Component{
             .style('cursor', (d) => {
                 return(d.name == 'origin') ? '' : (d.children || d._children) ? 'pointer' : '';
             });
-        nodeEnter.append('rect')
-            .attr('x', (d) => {
-                return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -120;
-            })
-            .attr('y', (d) => {
-                return(d.name == 'origin') ? -20 : 12;
-            })
-            .attr('width', (d) => {
-                return(d.name == 'origin') ? this.rootRectWidth : 230;
-            })
-            .attr('height', 40)
-            .attr('rx', 10)
-            .style('stroke', (d) => {
-                return(d.name == 'origin') ? "#1078AF" : "#CCC";
-            })
-            .style("fill", function(d) {
-                return(d.name == 'origin') ? "#0080E3" : "#FFF";   //节点背景色
-            });
+        // nodeEnter.append('rect')
+        //     .attr('x', (d) => {
+        //         return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -120;
+        //     })
+        //     .attr('y', (d) => {
+        //         return(d.name == 'origin') ? -20 : 12;
+        //     })
+        //     .attr('width', (d) => {
+        //         return(d.name == 'origin') ? this.rootRectWidth : 230;
+        //     })
+        //     .attr('height', 40)
+        //     .attr('rx', 10)
+        //     .style('stroke', (d) => {
+        //         return(d.name == 'origin') ? "#1078AF" : "#CCC";
+        //     })
+        //     .style("fill", function(d) {
+        //         return(d.name == 'origin') ? "#0080E3" : "#FFF";   //节点背景色
+        //     });
 
         nodeEnter.append('circle')
             .attr('r', 1e-6);
 
-        nodeEnter.append('text')
-            .attr('class', 'linkname')
-            .attr('x', (d) => {
-                return(d.name == 'origin') ? '0' : "-55";
-            })
-            .attr('dy', (d) => {
-                return(d.name == 'origin') ? '.35em' : '24';
-            })
-            .attr('text-anchor', (d) => {
-                return(d.name == 'origin') ? 'middle' : "start";
-            })
-            .attr('fill', '#000')
-            .text((d) => {
-                if(d.name === 'origin'){
-                    return '根节点'
-                }
-                if(d.repeated){
-                    return `[Recurring]${d.name}`;
-                }
-                return d.name.length > 10 ? d.name.substr(0, 10) : d.name;
-            })
-            .style({
-                'fill-opacity': 1e-6,
-                'fill': (d) => {
-                    if(d.name === 'origin'){
-                        return '#fff'
-                    }
-                },
-                'font-size': (d) => {
-                    return d.name === 'origin' ? 14 : 11;
-                },
-                'cursor': 'pointer'
-            })
-            .on('click', this.Change_modal);
+        // nodeEnter.append('text')
+        //     .attr('class', 'linkname')
+        //     .attr('x', (d) => {
+        //         return(d.name == 'origin') ? '0' : "-55";
+        //     })
+        //     .attr('dy', (d) => {
+        //         return(d.name == 'origin') ? '.35em' : '24';
+        //     })
+        //     .attr('text-anchor', (d) => {
+        //         return(d.name == 'origin') ? 'middle' : "start";
+        //     })
+        //     .attr('fill', '#000')
+        //     .text((d) => {
+        //         if(d.name === 'origin'){
+        //             return '根节点'
+        //         }
+        //         if(d.repeated){
+        //             return `[Recurring]${d.name}`;
+        //         }
+        //         return d.name.length > 10 ? d.name.substr(0, 10) : d.name;
+        //     })
+        //     .style({
+        //         'fill-opacity': 1e-6,
+        //         'fill': (d) => {
+        //             if(d.name === 'origin'){
+        //                 return '#fff'
+        //             }
+        //         },
+        //         'font-size': (d) => {
+        //             return d.name === 'origin' ? 14 : 11;
+        //         },
+        //         'cursor': 'pointer'
+        //     })
+        //     .on('click', this.Change_modal);
+
+            //添加DOM元素
+            const node_item = nodeEnter.append('foreignObject')
+                .attr('x', (d) => {
+                    return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -120;
+                })
+                .attr('y', (d) => {
+                    return(d.name == 'origin') ? -20 : 12;
+                })
+                .attr('width', (d) => {
+                    return(d.name == 'origin') ? this.rootRectWidth : 230;
+                })
+                .attr('height', 40)
+                .attr('style','border:1px solid #1078AF; background:#FFF;border-radius:10px')
+
+                .attr('x', (d) => {
+                    return(d.name == 'origin') ? -(this.rootRectWidth / 2) : -120;
+                })
+                .attr('y', (d) => {
+                    return(d.name == 'origin') ? -20 : 12;
+                })
+                .attr('width', (d) => {
+                    return(d.name == 'origin') ? this.rootRectWidth : 230;
+                })
+                node_item
+                    .append('xhtml:input')
+                    .text((d) => {
+                        return d.name;
+                    })
 
             //原有的节点更新到新位置
             const nodeUpdate = node.transition()
@@ -375,6 +394,21 @@ export default class Main extends React.Component{
                 .attr('transform', (d) => {
                     return `translate(${d.x}, ${d.y})`
                 });
+
+            // this.dom_nodes = this.treeGraph.selectAll('xrk-span')
+            //     .data(nodes)
+            //     .enter()
+            //     .append('input')
+            //     .call(this.custZoom())
+            //     .attr('class', 'xrk-span')
+            //     .attr('style', (d) => {
+            //         return "position:absolute;display:inline-block;width:50px;height:50px;border:1px solid red;transform:translate(" + (d.x + 14) + "px," + (d.y) + "px)";
+            //     });
+            // this.dom_nodes.transition()
+            //     .duration(this.treeConfig.duration)
+            //     .attr('transform', (d) => {
+            //         return `translate(${d.x}, ${d.y})`
+            //     });
 
             nodeUpdate.select('circle')
                 .attr('r', (d) => {
@@ -411,21 +445,11 @@ export default class Main extends React.Component{
                     if(d.name === 'origin'){
                         return '';
                     }
-                    // console.log('+-: ', this.hasChildNodeArr)
                     return this.hasChildNodeArr.indexOf(d) !== -1 ? '+' : ''
                 })
                 .on('click', this.click)
 
             nodeUpdate.select('text').style('fill-opacity', 1)
-
-            const dom_nodes = this.treeGraph.selectAll('xrk-span')
-                .data(nodes)
-                .enter()
-                .append('input')
-                .attr('class', 'xrk-span')
-                .attr('style', (d) => {
-                    return "position:absolute;display:inline-block;width:50px;height:50px;border:1px solid red;transform:translate(" + (d.x + 14) + "px," + (d.y) + "px)";
-                });
 
             const nodeExit = node.exit().transition()
                 .duration(this.treeConfig.duration)
@@ -480,10 +504,17 @@ export default class Main extends React.Component{
                     });
                 })
                 .remove();
+            
             nodes.forEach((d) => {
                 d.x0 = d.x;
                 d.y0 = d.y;
             });
+    };
+    //缩放行为
+    custZoom = () => {
+        return d3.behavior.zoom()
+            .scaleExtent([0.5, 2])
+            .on('zoom', this.redraw);
     };
     collapse = (d) => {
         if(d.children && d.children.length != 0) {
@@ -495,6 +526,10 @@ export default class Main extends React.Component{
     }
     redraw = () => {
         this.treeG.attr('transform', `translate(${d3.event.translate})scale(${d3.event.scale})`);
+        // this.dom_nodes.attr('style', (d) => {
+        //     return `position:absolute;display:inline-block;width:50px;height:50px;border:1px solid red;
+        //     transform:translate(${d.x + d3.event.translate[0]}px, ${d.y + d3.event.translate[1]}px) scale(${d3.event.scale})`;
+        // });
     }
     isableRightClick = () => {
         // stop zoom
@@ -517,7 +552,6 @@ export default class Main extends React.Component{
         }
         const touchedText = d3.selectAll('.isExpand')[0][num];
         touchedText.textContent = touchedText.textContent !== '+' ? '+' : '-';
-        // console.log(num, touchedText);
         if(d.children) {
             d._children = d.children;
             d.children = null;
@@ -541,7 +575,6 @@ export default class Main extends React.Component{
             //     return '-';
             // })
         }
-        console.log(d);
         this.update(d, this.data, this.treeG);
     }
     expand = (d) => {
