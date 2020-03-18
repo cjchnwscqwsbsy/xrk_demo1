@@ -459,7 +459,7 @@ export default class Main extends React.Component{
     redraw = () => {
         this.treeG.attr('transform', `translate(${d3.event.translate})scale(${d3.event.scale})`);
     }
-    isableRightClick = () => {
+    disableRightClick = () => {
         // stop zoom
         if(d3.event.button == 2) {
             console.log('No right click allowed');
