@@ -4,6 +4,19 @@
     width: 318px;
     border-radius: 6px;
     background: #ffffff;
+    &-circle{
+        position: absolute;
+        display: inline-block;
+        top: -3px;
+        width: 16px;
+        height: 16px;
+        text-align: center;
+        line-height: 15px;
+        font-size: 12px;
+        transform: scale(1.1);
+        border-radius: 100%;
+        background: #d34;
+    }
     &-item{
         display: inline-flex;
         width: 20%;
@@ -11,11 +24,13 @@
         margin: 0 1px;
         background: #dcdcdc;
         &-inner{
+            position: relative;
             display: inline-block;
             height: 10px;
             background: red;
         }
         &-inner0{
+            position: relative;
             display: inline-block;
             height: 10px;
             background: red;

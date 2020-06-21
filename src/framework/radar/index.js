@@ -64,18 +64,46 @@ export default class Radar extends React.Component{
         return {a,b};
     };
 
+    _getFinalRet = (a,b,value) => {
+        return a <= value && value <= b;
+    };
+
+    _getText = (value) => {
+        let result;
+        switch(true){
+            case this._getFinalRet(0,2,value):
+                result = '差';
+                break;
+            case this._getFinalRet(2,3,value):
+                result = '中';
+                break;
+            case this._getFinalRet(3,4,value):
+                result = '良';
+                break;
+            case this._getFinalRet(4,5,value):
+                result = '优';
+                break;
+            default:
+                result = '中';
+        }
+        return result;
+    };
+
     _renderProgress = (value) => {
         const { a, b } = this._calcuPercent(value);
-        const result = [];
+        const result = [], percent = b * 100, text = this._getText(value);
+        const percentF = percent > 70 ? percent - 13 : percent < 30 ? percent + 13 : percent;
         for(let i = 0; i < 5; i ++){
             if(i < a){
                 result.push(<span className={`ro-progress-item ro-progress-itemtrue${i}`}></span>);
             }else if((i === a) && b !== 0){
                 result.push(<span className={`ro-progress-item ro-progress-itemfalse${i}`}>
                     <span
-                        style={{width:`${b * 100}%`}}
+                        style={{width:`${percent}%`}}
                         className={`ro-progress-item-inner${i === 0 ? 0 : ''}`}
-                    />
+                    >
+                        <span style={{left:`${percentF}%`}} className={`ro-progress-circle`}>{text}</span>
+                    </span>
                 </span>);
             }else{
                 result.push(<span className={`ro-progress-item ro-progress-itemfalse${i}`}></span>);
@@ -85,7 +113,7 @@ export default class Radar extends React.Component{
     };
 
     render(){
-        const _v = 2.83;
+        const _v = 2.8;
         return (
             <React.Fragment>
                 <div className={`ro-progress`}>
@@ -96,4 +124,5 @@ export default class Radar extends React.Component{
         );
     }
 }
+
 
