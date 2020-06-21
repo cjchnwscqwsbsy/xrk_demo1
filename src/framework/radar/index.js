@@ -4,6 +4,7 @@ import  'echarts/lib/chart/radar';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 import 'echarts/lib/component/legend';
+import './index.less';
 
 export default class Radar extends React.Component{
     constructor(props){
@@ -56,9 +57,42 @@ export default class Radar extends React.Component{
             }]
         });
     }
+
+    _calcuPercent = (value) => {
+        const a = Math.floor(value);
+        const b = value - a;
+        return {a,b};
+    };
+
+    _renderProgress = (value) => {
+        const { a, b } = this._calcuPercent(value);
+        const result = [];
+        for(let i = 0; i < 5; i ++){
+            if(i < a){
+                result.push(<span className={`ro-progress-item ro-progress-itemtrue${i}`}></span>);
+            }else if((i === a) && b !== 0){
+                result.push(<span className={`ro-progress-item ro-progress-itemfalse${i}`}>
+                    <span
+                        style={{width:`${b * 100}%`}}
+                        className={`ro-progress-item-inner${i === 0 ? 0 : ''}`}
+                    />
+                </span>);
+            }else{
+                result.push(<span className={`ro-progress-item ro-progress-itemfalse${i}`}></span>);
+            }
+        }
+        return result;
+    };
+
     render(){
+        const _v = 2.83;
         return (
-            <div id='radarId' style={{ width: '100%', height: 800 }}></div>
+            <React.Fragment>
+                <div className={`ro-progress`}>
+                    {this._renderProgress(_v)}
+                </div>
+                <div id='radarId' style={{ width: '100%', height: 800 }}></div>
+            </React.Fragment>
         );
     }
 }
