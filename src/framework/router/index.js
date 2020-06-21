@@ -5,11 +5,13 @@ import PersonaManager from '../personalManager';
 import Login from '../login';
 import { UploadF } from '../../component/index';
 import Main from '../../framework/main';
+import Radar from '../radar';
 
 const Router = () => {
     return (
         <BrowserRouter>
-            <Route path="/" exact component={Main} />
+            <Route path="/" exact component={Radar} />
+            <Route path="/Main" exact component={Main} />
             <Route path="/home" component={Home} />
             <Route path="/reset_password" component={PersonaManager} />
             <Route path="/login" component={Login} />
